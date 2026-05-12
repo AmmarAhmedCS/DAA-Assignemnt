@@ -1,0 +1,85 @@
+public class LCSProgram {
+
+    public static void main(String[] args) {
+
+        
+        String firstString = "MUHAMMADAMMAR";
+        String secondString = "ETAOINSHR";
+
+        int rows = firstString.length();
+        int cols = secondString.length();
+
+        int[][] table = new int[rows + 1][cols + 1];
+
+     
+        for (int r = 1; r <= rows; r++) {
+
+            for (int c = 1; c <= cols; c++) {
+
+                if (firstString.charAt(r - 1) == secondString.charAt(c - 1)) {
+
+                    table[r][c] = table[r - 1][c - 1] + 1;
+
+                } else {
+
+                    table[r][c] = Math.max(table[r - 1][c],
+                                           table[r][c - 1]);
+                }
+            }
+        }
+
+        
+        System.out.println(" Longest Common Subsequence Table ");
+
+        System.out.print("    ");
+        for (int k = 0; k < secondString.length(); k++) {
+            System.out.printf("%3c", secondString.charAt(k));
+        }
+        System.out.println();
+
+        for (int r = 0; r <= rows; r++) {
+
+            if (r == 0)
+                System.out.print("  ");
+            else
+                System.out.print(firstString.charAt(r - 1) + " ");
+
+            for (int c = 0; c <= cols; c++) {
+                System.out.printf("%3d", table[r][c]);
+            }
+
+            System.out.println();
+        }
+
+       
+        String answer = "";
+
+        int r = rows;
+        int c = cols;
+
+        while (r > 0 && c > 0) {
+
+            if (firstString.charAt(r - 1) == secondString.charAt(c - 1)) {
+
+                answer = firstString.charAt(r - 1) + answer;
+                r--;
+                c--;
+
+            } else if (table[r - 1][c] >= table[r][c - 1]) {
+
+                r--;
+
+            } else {
+
+                c--;
+            }
+        }
+
+        
+        System.out.println("\n Final Result ");
+        System.out.println("String 1 : " + firstString);
+        System.out.println("String 2 : " + secondString);
+        System.out.println("Length of LCS : " + table[rows][cols]);
+        System.out.println("LCS Value     : " + answer);
+    }
+}
