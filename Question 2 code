@@ -1,0 +1,48 @@
+public class CurrencyChanger {
+
+    public static void main(String[] args) {
+
+        int money = 1988;
+
+        
+        int[] notes = {5000, 1000, 500, 100, 50, 20, 10, 5, 2, 1};
+
+        System.out.println(" Coin Change Problem ");
+        System.out.println("Entered Amount: Rs. " + money);
+        
+        int balance = money;
+        int piecesUsed = 0;
+
+        for (int i = 0; i < notes.length; i++) {
+
+            int current = notes[i];
+
+            if (balance >= current) {
+
+                int quantity = balance / current;
+
+                System.out.println(
+                        "Rs. " + current +
+                        " -> " + quantity +
+                        " piece(s)"
+                );
+
+                balance = balance % current;
+                piecesUsed += quantity;
+            }
+        }
+       
+        System.out.println("Total Notes/Coins = " + piecesUsed);
+        System.out.println("Amount Left = Rs. " + balance);
+    }
+}
+
+
+
+
+
+
+
+
+
+
